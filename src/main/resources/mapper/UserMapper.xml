@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.by.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.by.bean.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userwx" property="userwx" jdbcType="BIGINT" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="SMALLINT" />
+    <result column="birthday" property="birthday" jdbcType="BIGINT" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="Education" property="education" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="compiled" property="compiled" jdbcType="INTEGER" />
+    <result column="work_of_father" property="workOfFather" jdbcType="VARCHAR" />
+    <result column="work_of_mom" property="workOfMom" jdbcType="VARCHAR" />
+    <result column="photo_self" property="photoSelf" jdbcType="VARCHAR" />
+    <result column="photo_others" property="photoOthers" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+    <result column="is_live_location_yulin" property="isLiveLocationYulin" jdbcType="SMALLINT" />
+    <result column="live_location" property="liveLocation" jdbcType="VARCHAR" />
+    <result column="is_information_public" property="isInformationPublic" jdbcType="SMALLINT" />
+    <result column="hometown" property="hometown" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.by.bean.User" extends="BaseResultMap" >
+    <result column="standard" property="standard" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userwx, realname, sex, birthday, height, weight, Education, company, compiled, 
+    work_of_father, work_of_mom, photo_self, photo_others, create_time, phone, status, 
+    modify_time, is_live_location_yulin, live_location, is_information_public, hometown, 
+    job
+  </sql>
+  <sql id="Blob_Column_List" >
+    standard
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from users
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from users
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.by.bean.User" >
+    insert into users (id, userwx, realname, 
+      sex, birthday, height, 
+      weight, Education, company, 
+      compiled, work_of_father, work_of_mom, 
+      photo_self, photo_others, create_time, 
+      phone, status, modify_time, 
+      is_live_location_yulin, live_location, is_information_public, 
+      hometown, job, standard
+      )
+    values (#{id,jdbcType=BIGINT}, #{userwx,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=SMALLINT}, #{birthday,jdbcType=BIGINT}, #{height,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{education,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
+      #{compiled,jdbcType=INTEGER}, #{workOfFather,jdbcType=VARCHAR}, #{workOfMom,jdbcType=VARCHAR}, 
+      #{photoSelf,jdbcType=VARCHAR}, #{photoOthers,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{modifyTime,jdbcType=BIGINT}, 
+      #{isLiveLocationYulin,jdbcType=SMALLINT}, #{liveLocation,jdbcType=VARCHAR}, #{isInformationPublic,jdbcType=SMALLINT}, 
+      #{hometown,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{standard,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.by.bean.User" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userwx != null" >
+        userwx,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="education != null" >
+        Education,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="compiled != null" >
+        compiled,
+      </if>
+      <if test="workOfFather != null" >
+        work_of_father,
+      </if>
+      <if test="workOfMom != null" >
+        work_of_mom,
+      </if>
+      <if test="photoSelf != null" >
+        photo_self,
+      </if>
+      <if test="photoOthers != null" >
+        photo_others,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="isLiveLocationYulin != null" >
+        is_live_location_yulin,
+      </if>
+      <if test="liveLocation != null" >
+        live_location,
+      </if>
+      <if test="isInformationPublic != null" >
+        is_information_public,
+      </if>
+      <if test="hometown != null" >
+        hometown,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="standard != null" >
+        standard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userwx != null" >
+        #{userwx,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=BIGINT},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="compiled != null" >
+        #{compiled,jdbcType=INTEGER},
+      </if>
+      <if test="workOfFather != null" >
+        #{workOfFather,jdbcType=VARCHAR},
+      </if>
+      <if test="workOfMom != null" >
+        #{workOfMom,jdbcType=VARCHAR},
+      </if>
+      <if test="photoSelf != null" >
+        #{photoSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="photoOthers != null" >
+        #{photoOthers,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="isLiveLocationYulin != null" >
+        #{isLiveLocationYulin,jdbcType=SMALLINT},
+      </if>
+      <if test="liveLocation != null" >
+        #{liveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isInformationPublic != null" >
+        #{isInformationPublic,jdbcType=SMALLINT},
+      </if>
+      <if test="hometown != null" >
+        #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.by.bean.User" >
+    update users
+    <set >
+      <if test="userwx != null" >
+        userwx = #{userwx,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=BIGINT},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="education != null" >
+        Education = #{education,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="compiled != null" >
+        compiled = #{compiled,jdbcType=INTEGER},
+      </if>
+      <if test="workOfFather != null" >
+        work_of_father = #{workOfFather,jdbcType=VARCHAR},
+      </if>
+      <if test="workOfMom != null" >
+        work_of_mom = #{workOfMom,jdbcType=VARCHAR},
+      </if>
+      <if test="photoSelf != null" >
+        photo_self = #{photoSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="photoOthers != null" >
+        photo_others = #{photoOthers,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="isLiveLocationYulin != null" >
+        is_live_location_yulin = #{isLiveLocationYulin,jdbcType=SMALLINT},
+      </if>
+      <if test="liveLocation != null" >
+        live_location = #{liveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isInformationPublic != null" >
+        is_information_public = #{isInformationPublic,jdbcType=SMALLINT},
+      </if>
+      <if test="hometown != null" >
+        hometown = #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null" >
+        standard = #{standard,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.by.bean.User" >
+    update users
+    set userwx = #{userwx,jdbcType=BIGINT},
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=SMALLINT},
+      birthday = #{birthday,jdbcType=BIGINT},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      Education = #{education,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      compiled = #{compiled,jdbcType=INTEGER},
+      work_of_father = #{workOfFather,jdbcType=VARCHAR},
+      work_of_mom = #{workOfMom,jdbcType=VARCHAR},
+      photo_self = #{photoSelf,jdbcType=VARCHAR},
+      photo_others = #{photoOthers,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=BIGINT},
+      is_live_location_yulin = #{isLiveLocationYulin,jdbcType=SMALLINT},
+      live_location = #{liveLocation,jdbcType=VARCHAR},
+      is_information_public = #{isInformationPublic,jdbcType=SMALLINT},
+      hometown = #{hometown,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      standard = #{standard,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.by.bean.User" >
+    update users
+    set userwx = #{userwx,jdbcType=BIGINT},
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=SMALLINT},
+      birthday = #{birthday,jdbcType=BIGINT},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      Education = #{education,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      compiled = #{compiled,jdbcType=INTEGER},
+      work_of_father = #{workOfFather,jdbcType=VARCHAR},
+      work_of_mom = #{workOfMom,jdbcType=VARCHAR},
+      photo_self = #{photoSelf,jdbcType=VARCHAR},
+      photo_others = #{photoOthers,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=BIGINT},
+      is_live_location_yulin = #{isLiveLocationYulin,jdbcType=SMALLINT},
+      live_location = #{liveLocation,jdbcType=VARCHAR},
+      is_information_public = #{isInformationPublic,jdbcType=SMALLINT},
+      hometown = #{hometown,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
