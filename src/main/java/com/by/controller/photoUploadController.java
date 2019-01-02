@@ -31,6 +31,7 @@ public class photoUploadController {
     public void photoUpload(MultipartFile file, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IllegalStateException, IOException {
         Map resultData = new HashMap();
         String openid = request.getParameter("openid");
+        System.out.println("openid=======================:"+openid);
         if (file!=null) {// 判断上传的文件是否为空
             String path=null;// 文件路径
             String type=null;// 文件类型

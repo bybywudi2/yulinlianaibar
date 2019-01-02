@@ -3,7 +3,7 @@ package com.by.bean;
 public class User {
     private Long id;
 
-    private Long userwx;
+    private String userwx;
 
     private String realname;
 
@@ -57,12 +57,12 @@ public class User {
         this.id = id;
     }
 
-    public Long getUserwx() {
+    public String getUserwx() {
         return userwx;
     }
 
-    public void setUserwx(Long userwx) {
-        this.userwx = userwx;
+    public void setUserwx(String userwx) {
+        this.userwx = userwx == null ? null : userwx.trim();
     }
 
     public String getRealname() {

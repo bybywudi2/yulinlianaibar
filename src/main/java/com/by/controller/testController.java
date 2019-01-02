@@ -23,7 +23,7 @@ public class testController {
         User u = userMapper.selectByPrimaryKey(id);
 
         u.setId(id);
-        u.setBirthday(new Date());
+        u.setBirthday(new Date().getTime());
         u.setCompany("123");
         u.setCompiled(1);
         u.setCreateTime(new Date().getTime());

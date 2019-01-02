@@ -12,7 +12,7 @@
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="BIGINT" />
     <result column="latest_login_time" property="latestLoginTime" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="active_status" property="activeStatus" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
@@ -40,7 +40,7 @@
     values (#{id,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{headUrl,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{country,jdbcType=VARCHAR}, 
       #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
-      #{latestLoginTime,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{activeStatus,jdbcType=INTEGER}, 
+      #{latestLoginTime,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{activeStatus,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{modifyTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.by.bean.WxUser" >
@@ -121,7 +121,7 @@
         #{latestLoginTime,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="activeStatus != null" >
         #{activeStatus,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
         latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="activeStatus != null" >
         active_status = #{activeStatus,jdbcType=INTEGER},
@@ -190,10 +190,11 @@
       city = #{city,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=BIGINT},
       latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
       active_status = #{activeStatus,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       modify_time = #{modifyTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

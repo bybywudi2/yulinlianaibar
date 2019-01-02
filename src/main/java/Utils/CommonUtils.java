@@ -1,9 +1,6 @@
 package Utils;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.URL;
 import java.security.cert.X509Certificate;
@@ -11,6 +8,8 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.*;
 
 import com.alibaba.fastjson.JSONObject;
+import com.by.constant.Paths;
+
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
@@ -107,5 +106,24 @@ public class CommonUtils {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(day);
         //System.out.println(df.format(day));
+    }
+
+    public static String getSavePath(String openid){
+        String realSavePath;
+        if(System.getProperty("file.separator").equals("/")) {
+            realSavePath = Paths.linuxSavePath;
+        }else{
+            realSavePath = Paths.windowsSavePath;
+        }
+        int hashcode = openid.hashCode();
+        int dir = hashcode % 200;
+
+        String savepath = realSavePath + File.separator + dir + File.separator;
+        File file = new File(savepath);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+
+        return savepath;
     }
 }

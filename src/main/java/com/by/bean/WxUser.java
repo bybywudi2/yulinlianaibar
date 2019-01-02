@@ -21,7 +21,7 @@ public class WxUser {
 
     private Long latestLoginTime;
 
-    private Integer userId;
+    private Long userId;
 
     private Integer activeStatus;
 
@@ -109,11 +109,11 @@ public class WxUser {
         this.latestLoginTime = latestLoginTime;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

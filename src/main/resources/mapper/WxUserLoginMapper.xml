@@ -18,9 +18,186 @@
     <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
   </resultMap>
 
+    <resultMap id="User" type="com.by.bean.User" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="userwx" property="userwx" jdbcType="BIGINT" />
+        <result column="realname" property="realname" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="SMALLINT" />
+        <result column="birthday" property="birthday" jdbcType="BIGINT" />
+        <result column="height" property="height" jdbcType="INTEGER" />
+        <result column="weight" property="weight" jdbcType="INTEGER" />
+        <result column="Education" property="education" jdbcType="INTEGER" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="compiled" property="compiled" jdbcType="INTEGER" />
+        <result column="work_of_father" property="workOfFather" jdbcType="VARCHAR" />
+        <result column="work_of_mom" property="workOfMom" jdbcType="VARCHAR" />
+        <result column="photo_self" property="photoSelf" jdbcType="VARCHAR" />
+        <result column="photo_others" property="photoOthers" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+        <result column="is_live_location_yulin" property="isLiveLocationYulin" jdbcType="SMALLINT" />
+        <result column="live_location" property="liveLocation" jdbcType="VARCHAR" />
+        <result column="is_information_public" property="isInformationPublic" jdbcType="SMALLINT" />
+        <result column="hometown" property="hometown" jdbcType="VARCHAR" />
+        <result column="job" property="job" jdbcType="VARCHAR" />
+    </resultMap>
   <select id="selectByOpenid" resultMap="WxUser" parameterType="java.lang.String" >
     select *
     from wx_users
     where openid = #{openid,jdbcType=VARCHAR}
   </select>
+
+    <insert id="insertAndReturnPK" parameterType="com.by.bean.User" >
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userwx != null" >
+                userwx,
+            </if>
+            <if test="realname != null" >
+                realname,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="height != null" >
+                height,
+            </if>
+            <if test="weight != null" >
+                weight,
+            </if>
+            <if test="education != null" >
+                Education,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="compiled != null" >
+                compiled,
+            </if>
+            <if test="workOfFather != null" >
+                work_of_father,
+            </if>
+            <if test="workOfMom != null" >
+                work_of_mom,
+            </if>
+            <if test="photoSelf != null" >
+                photo_self,
+            </if>
+            <if test="photoOthers != null" >
+                photo_others,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="modifyTime != null" >
+                modify_time,
+            </if>
+            <if test="isLiveLocationYulin != null" >
+                is_live_location_yulin,
+            </if>
+            <if test="liveLocation != null" >
+                live_location,
+            </if>
+            <if test="isInformationPublic != null" >
+                is_information_public,
+            </if>
+            <if test="hometown != null" >
+                hometown,
+            </if>
+            <if test="job != null" >
+                job,
+            </if>
+            <if test="standard != null" >
+                standard,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userwx != null" >
+                #{userwx,jdbcType=BIGINT},
+            </if>
+            <if test="realname != null" >
+                #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=SMALLINT},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=BIGINT},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="education != null" >
+                #{education,jdbcType=INTEGER},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="compiled != null" >
+                #{compiled,jdbcType=INTEGER},
+            </if>
+            <if test="workOfFather != null" >
+                #{workOfFather,jdbcType=VARCHAR},
+            </if>
+            <if test="workOfMom != null" >
+                #{workOfMom,jdbcType=VARCHAR},
+            </if>
+            <if test="photoSelf != null" >
+                #{photoSelf,jdbcType=VARCHAR},
+            </if>
+            <if test="photoOthers != null" >
+                #{photoOthers,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="modifyTime != null" >
+                #{modifyTime,jdbcType=BIGINT},
+            </if>
+            <if test="isLiveLocationYulin != null" >
+                #{isLiveLocationYulin,jdbcType=SMALLINT},
+            </if>
+            <if test="liveLocation != null" >
+                #{liveLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="isInformationPublic != null" >
+                #{isInformationPublic,jdbcType=SMALLINT},
+            </if>
+            <if test="hometown != null" >
+                #{hometown,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null" >
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="standard != null" >
+                #{standard,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>
