@@ -5,6 +5,7 @@ import Utils.WxConfig;
 import com.alibaba.fastjson.JSONObject;
 import com.by.bean.User;
 import com.by.bean.WxUser;
+import com.by.constant.ActiveStatus;
 import com.by.dao.UserMapper;
 import com.by.dao.WxUserLoginMapper;
 import com.by.dao.WxUserMapper;
@@ -59,7 +60,7 @@ public class UserInfoRegistController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("isLiveLocationYulin=================="+is_live_location_yulin);
+        //System.out.println("isLiveLocationYulin=================="+is_live_location_yulin);
         user.setHeight(Integer.parseInt(height));
         user.setWeight(Integer.parseInt(weight));
         user.setEducation(Integer.parseInt(education));
@@ -76,14 +77,22 @@ public class UserInfoRegistController {
         user.setUserwx(userwx);
         user.setCompany(company);
 
+
         Long userId = wxUser.getUserId();
         if(userId == null){
-            int ididid = wxUserLoginMapper.insertAndReturnPK(user);
-            System.out.println("id====================="+user.getId());
-            System.out.println("ididid====================="+ididid);
-            //wxUser.setUserId(user.getId());
+            user.setCreateTime(new Date().getTime());
+            wxUserLoginMapper.insertAndReturnPK(user);
+            long uid = user.getId();
+            //System.out.println("ididid====================="+uid);
+            wxUser.setUserId(uid);
+            wxUser.setActiveStatus(ActiveStatus.ONLY_WX_REGISTED);
+            wxUserMapper.updateByPrimaryKeySelective(wxUser);
+            //System.out.println("id====================="+user.getId());
+            //            System.out.println("ididid====================="+ididid);
+            //            //wxUser.setUserId(user.getId());
         }else{
             user.setId(userId);
+            user.setModifyTime(new Date().getTime());
             userMapper.updateByPrimaryKey(user);
         }
 
@@ -91,6 +100,7 @@ public class UserInfoRegistController {
 
 
         Map map = new HashMap();
+        map.put("success","true");
         return map;
 
     }

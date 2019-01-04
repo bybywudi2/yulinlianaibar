@@ -6,5 +6,5 @@ import com.by.bean.WxUser;
 public interface WxUserLoginMapper {
     WxUser selectByOpenid(String openid);
 
-    int insertAndReturnPK(User record);
+    long insertAndReturnPK(User record);
 }

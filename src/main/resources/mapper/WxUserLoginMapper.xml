@@ -55,6 +55,9 @@
         </selectKey>
         insert into users
         <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
             <if test="userwx != null" >
                 userwx,
             </if>
