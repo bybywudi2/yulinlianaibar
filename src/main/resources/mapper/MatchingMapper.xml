@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.by.dao.MatchingMapper" >
+  <resultMap id="WxUser" type="com.by.bean.WxUser" >
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="openid" property="openid" jdbcType="VARCHAR" />
+      <result column="head_url" property="headUrl" jdbcType="VARCHAR" />
+      <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+      <result column="sex" property="sex" jdbcType="SMALLINT" />
+      <result column="country" property="country" jdbcType="VARCHAR" />
+      <result column="province" property="province" jdbcType="VARCHAR" />
+      <result column="city" property="city" jdbcType="VARCHAR" />
+      <result column="create_time" property="createTime" jdbcType="BIGINT" />
+      <result column="latest_login_time" property="latestLoginTime" jdbcType="BIGINT" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="active_status" property="activeStatus" jdbcType="INTEGER" />
+      <result column="status" property="status" jdbcType="INTEGER" />
+      <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+      <result column="is_ready" property="isReady" jdbcType="SMALLINT" />
+      <result column="matching_user_id" property="matchingUserId" jdbcType="BIGINT" />
+  </resultMap>
+
+
+  <select id="selectMatchedUsersByOpenid" resultMap="WxUser" parameterType="com.by.po.MatchingStandard" >
+    select a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
+    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id from wx_users a
+    left JOIN users b
+    on a.user_id = b.id
+    WHERE
+    a.is_ready = 1
+    AND
+    b.sex = #{sex,jdbcType=SMALLINT}
+    AND
+    a.openid != #{openid,jdbcType=VARCHAR}
+    AND
+    a.matching_user_id = 0
+  </select>
+
+
+</mapper>

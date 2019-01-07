@@ -85,7 +85,7 @@ public class UserInfoRegistController {
             long uid = user.getId();
             //System.out.println("ididid====================="+uid);
             wxUser.setUserId(uid);
-            wxUser.setActiveStatus(ActiveStatus.ONLY_WX_REGISTED);
+            wxUser.setActiveStatus(ActiveStatus.INFO_REGISTED_BUT_NOT_REAL);
             wxUserMapper.updateByPrimaryKeySelective(wxUser);
             //System.out.println("id====================="+user.getId());
             //            System.out.println("ididid====================="+ididid);

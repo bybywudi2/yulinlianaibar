@@ -29,6 +29,10 @@ public class WxUser {
 
     private Long modifyTime;
 
+    private Short isReady;
+
+    private Long matchingUserId;
+
     public Long getId() {
         return id;
     }
@@ -139,5 +143,21 @@ public class WxUser {
 
     public void setModifyTime(Long modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Short getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(Short isReady) {
+        this.isReady = isReady;
+    }
+
+    public Long getMatchingUserId() {
+        return matchingUserId;
+    }
+
+    public void setMatchingUserId(Long matchingUserId) {
+        this.matchingUserId = matchingUserId;
     }
 }

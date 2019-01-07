@@ -3,7 +3,7 @@
 <mapper namespace="com.by.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.by.bean.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="userwx" property="userwx" jdbcType="BIGINT" />
+    <result column="userwx" property="userwx" jdbcType="VARCHAR" />
     <result column="realname" property="realname" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="SMALLINT" />
     <result column="birthday" property="birthday" jdbcType="BIGINT" />
@@ -60,7 +60,7 @@
       is_live_location_yulin, live_location, is_information_public, 
       hometown, job, standard
       )
-    values (#{id,jdbcType=BIGINT}, #{userwx,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{userwx,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
       #{sex,jdbcType=SMALLINT}, #{birthday,jdbcType=BIGINT}, #{height,jdbcType=INTEGER}, 
       #{weight,jdbcType=INTEGER}, #{education,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, 
       #{compiled,jdbcType=INTEGER}, #{workOfFather,jdbcType=VARCHAR}, #{workOfMom,jdbcType=VARCHAR}, 
@@ -151,7 +151,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="userwx != null" >
-        #{userwx,jdbcType=BIGINT},
+        #{userwx,jdbcType=VARCHAR},
       </if>
       <if test="realname != null" >
         #{realname,jdbcType=VARCHAR},
@@ -225,7 +225,7 @@
     update users
     <set >
       <if test="userwx != null" >
-        userwx = #{userwx,jdbcType=BIGINT},
+        userwx = #{userwx,jdbcType=VARCHAR},
       </if>
       <if test="realname != null" >
         realname = #{realname,jdbcType=VARCHAR},
@@ -298,7 +298,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.by.bean.User" >
     update users
-    set userwx = #{userwx,jdbcType=BIGINT},
+    set userwx = #{userwx,jdbcType=VARCHAR},
       realname = #{realname,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=SMALLINT},
       birthday = #{birthday,jdbcType=BIGINT},
@@ -325,7 +325,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.by.bean.User" >
     update users
-    set userwx = #{userwx,jdbcType=BIGINT},
+    set userwx = #{userwx,jdbcType=VARCHAR},
       realname = #{realname,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=SMALLINT},
       birthday = #{birthday,jdbcType=BIGINT},
