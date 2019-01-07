@@ -62,7 +62,9 @@ public class MatchingReadyController {
             int rand = (int)(0+Math.random()*(list.size()));
             WxUser matchedUser = list.get(rand);
             matchedUser.setMatchingUserId(thisUser.getId());
+            matchedUser.setShouldInitTime(new Date().getTime() + 24*60*60);
             thisUser.setMatchingUserId(matchedUser.getId());
+            thisUser.setShouldInitTime(new Date().getTime() + 24*60*60);
 
             wxUserMapper.updateByPrimaryKeySelective(thisUser);
             wxUserMapper.updateByPrimaryKeySelective(matchedUser);

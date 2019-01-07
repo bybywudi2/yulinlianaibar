@@ -23,7 +23,7 @@
 
   <select id="selectMatchedUsersByOpenid" resultMap="WxUser" parameterType="com.by.po.MatchingStandard" >
     select a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
-    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id from wx_users a
+    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id, a.should_init_time from wx_users a
     left JOIN users b
     on a.user_id = b.id
     WHERE
@@ -36,5 +36,24 @@
     a.matching_user_id = 0
   </select>
 
+    <select id="selectMatchTimeOutUsers" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select a.id from wx_users a
+        WHERE
+        a.should_init_time &lt;= #{systemTime,jdbcType=BIGINT}
+        AND
+        a.is_ready = 1
+    </select>
+
+    <update id="updateMatchStatus">
+        update wx_users
+        set
+        is_ready = 0,
+        matching_user_id = 0,
+        should_init_time = 9546273556975
+        WHERE id in
+        <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 
 </mapper>

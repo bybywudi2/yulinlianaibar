@@ -33,6 +33,8 @@ public class WxUser {
 
     private Long matchingUserId;
 
+    private Long shouldInitTime;
+
     public Long getId() {
         return id;
     }
@@ -159,5 +161,13 @@ public class WxUser {
 
     public void setMatchingUserId(Long matchingUserId) {
         this.matchingUserId = matchingUserId;
+    }
+
+    public Long getShouldInitTime() {
+        return shouldInitTime;
+    }
+
+    public void setShouldInitTime(Long shouldInitTime) {
+        this.shouldInitTime = shouldInitTime;
     }
 }

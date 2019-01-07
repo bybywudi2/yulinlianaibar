@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -14,7 +15,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 1、配置映射器与适配器 -->
     <mvc:annotation-driven></mvc:annotation-driven>
@@ -61,7 +63,13 @@
         <property name="maxInMemorySize" value="40960" />
     </bean>
 
-    <!--  配置静态资源，防止被springmvc过滤 -->
+    <task:scheduled-tasks>
+        <task:scheduled ref="quartzTestBean" method="cancelMatch" cron="*/5 * * * * ?" />
+    </task:scheduled-tasks>
+
+    <bean id="quartzTestBean" class="com.by.cronjobs.MatchTimeOut"/>
+
+    <!--  配置静态资源，防止被springmvc过滤
     <mvc:resources location="/" mapping="/**/*.html"/>
     <mvc:resources location="/" mapping="/**/*.js"/>
     <mvc:resources location="/" mapping="/**/*.css"/>
@@ -72,6 +80,6 @@
     <mvc:resources location="/" mapping="/**/*.jpg"/>
     <mvc:resources location="/" mapping="/**/*.mp3"/>
     <mvc:resources location="/" mapping="/**/*.mp4"/>
-
+     -->
 
 </beans>

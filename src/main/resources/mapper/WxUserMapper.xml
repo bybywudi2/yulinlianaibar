@@ -18,10 +18,11 @@
     <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
     <result column="is_ready" property="isReady" jdbcType="SMALLINT" />
     <result column="matching_user_id" property="matchingUserId" jdbcType="BIGINT" />
+    <result column="should_init_time" property="shouldInitTime" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, openid, head_url, nickname, sex, country, province, city, create_time, latest_login_time, 
-    user_id, active_status, status, modify_time, is_ready, matching_user_id
+    user_id, active_status, status, modify_time, is_ready, matching_user_id, should_init_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -39,13 +40,13 @@
       province, city, create_time, 
       latest_login_time, user_id, active_status, 
       status, modify_time, is_ready, 
-      matching_user_id)
+      matching_user_id, should_init_time)
     values (#{id,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{headUrl,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{country,jdbcType=VARCHAR}, 
       #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
       #{latestLoginTime,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{activeStatus,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{modifyTime,jdbcType=BIGINT}, #{isReady,jdbcType=SMALLINT}, 
-      #{matchingUserId,jdbcType=BIGINT})
+      #{matchingUserId,jdbcType=BIGINT}, #{shouldInitTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.by.bean.WxUser" >
     insert into wx_users
@@ -98,6 +99,9 @@
       <if test="matchingUserId != null" >
         matching_user_id,
       </if>
+      <if test="shouldInitTime != null" >
+        should_init_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -147,6 +151,9 @@
       </if>
       <if test="matchingUserId != null" >
         #{matchingUserId,jdbcType=BIGINT},
+      </if>
+      <if test="shouldInitTime != null" >
+        #{shouldInitTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -198,6 +205,9 @@
       <if test="matchingUserId != null" >
         matching_user_id = #{matchingUserId,jdbcType=BIGINT},
       </if>
+      <if test="shouldInitTime != null" >
+        should_init_time = #{shouldInitTime,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -217,7 +227,8 @@
       status = #{status,jdbcType=INTEGER},
       modify_time = #{modifyTime,jdbcType=BIGINT},
       is_ready = #{isReady,jdbcType=SMALLINT},
-      matching_user_id = #{matchingUserId,jdbcType=BIGINT}
+      matching_user_id = #{matchingUserId,jdbcType=BIGINT},
+      should_init_time = #{shouldInitTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
