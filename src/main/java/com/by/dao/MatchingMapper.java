@@ -14,4 +14,8 @@ public interface MatchingMapper {
     List<Long> selectMatchTimeOutUsers(long systemTime);
 
     int updateMatchStatus(@Param("ids")List idList);
+
+    List<WxUser> selectMatchReadyMaleUsers();
+
+    List<WxUser> selectMatchReadyFemaleUsers();
 }

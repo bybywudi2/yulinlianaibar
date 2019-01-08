@@ -64,10 +64,12 @@
     </bean>
 
     <task:scheduled-tasks>
-        <task:scheduled ref="quartzTestBean" method="cancelMatch" cron="*/5 * * * * ?" />
+        <task:scheduled ref="quartzTestBean" method="cancelMatch" cron="0 */5 * * * ?" />
+        <task:scheduled ref="doMatchBean" method="doMatch" cron="0 */10 * * * ?" />
     </task:scheduled-tasks>
 
     <bean id="quartzTestBean" class="com.by.cronjobs.MatchTimeOut"/>
+    <bean id="doMatchBean" class="com.by.cronjobs.DoMatch"/>
 
     <!--  配置静态资源，防止被springmvc过滤
     <mvc:resources location="/" mapping="/**/*.html"/>

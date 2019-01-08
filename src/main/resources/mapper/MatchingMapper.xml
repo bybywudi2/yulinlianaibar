@@ -19,11 +19,16 @@
       <result column="is_ready" property="isReady" jdbcType="SMALLINT" />
       <result column="matching_user_id" property="matchingUserId" jdbcType="BIGINT" />
   </resultMap>
-
+    <sql id="Base_Column_List" >
+        id, openid, head_url, nickname, sex, country, province, city, create_time, latest_login_time,
+        user_id, active_status, status, modify_time, is_ready, matching_user_id, should_init_time
+    </sql>
 
   <select id="selectMatchedUsersByOpenid" resultMap="WxUser" parameterType="com.by.po.MatchingStandard" >
-    select a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
-    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id, a.should_init_time from wx_users a
+    select
+     a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
+    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id, a.should_init_time
+    from wx_users a
     left JOIN users b
     on a.user_id = b.id
     WHERE
@@ -56,4 +61,33 @@
         </foreach>
     </update>
 
+    <select id="selectMatchReadyMaleUsers" resultType="com.by.bean.WxUser">
+        select
+         a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
+    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id, a.should_init_time
+        from wx_users a
+        left JOIN users b
+        on a.user_id = b.id
+        WHERE
+        a.is_ready = 1
+        AND
+        a.matching_user_id = 0
+        AND
+        b.sex = 0
+    </select>
+
+    <select id="selectMatchReadyFemaleUsers" resultType="com.by.bean.WxUser">
+        select
+         a.id, a.openid, a.head_url, a.nickname, a.sex, a.country, a.province, a.city, a.create_time, a.latest_login_time,
+    a.user_id, a.active_status, a.status, a.modify_time, a.is_ready, a.matching_user_id, a.should_init_time
+        from wx_users a
+        left JOIN users b
+        on a.user_id = b.id
+        WHERE
+        a.is_ready = 1
+        AND
+        a.matching_user_id = 0
+        AND
+        b.sex = 1
+    </select>
 </mapper>
