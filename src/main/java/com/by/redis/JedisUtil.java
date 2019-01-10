@@ -34,9 +34,10 @@ public class JedisUtil {
     }
 
     public synchronized static Jedis getJedis(){
+        Jedis jedis = null;
         try{
             if(jedisPool != null){
-                Jedis jedis = jedisPool.getResource();
+                jedis = jedisPool.getResource();
                 return jedis;
             }else{
                 return null;
@@ -44,6 +45,10 @@ public class JedisUtil {
         }catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
+            if(jedis != null ) {
+                jedisPool.returnResource(jedis);
+            }
         }
     }
 
