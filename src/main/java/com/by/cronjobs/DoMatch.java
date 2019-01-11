@@ -70,6 +70,8 @@ public class DoMatch {
                     System.out.println("match"+"u1="+u1.getId()+"u2="+u2.getId());
                 }
             }
+        }else{
+            System.out.println("no more user");
         }
 
     }

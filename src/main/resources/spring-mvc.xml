@@ -64,8 +64,8 @@
     </bean>
 
     <task:scheduled-tasks>
-        <task:scheduled ref="quartzTestBean" method="cancelMatch" cron="0 */5 * * * ?" />
-        <task:scheduled ref="doMatchBean" method="doMatch" cron="0 */10 * * * ?" />
+        <task:scheduled ref="quartzTestBean" method="cancelMatch" cron="0 */1 * * * ?" />
+        <task:scheduled ref="doMatchBean" method="doMatch" cron="0 */1 * * * ?" />
     </task:scheduled-tasks>
 
     <bean id="quartzTestBean" class="com.by.cronjobs.MatchTimeOut"/>
