@@ -7,6 +7,8 @@ import com.by.dao.UserMapper;
 import com.by.dao.WxUserLoginMapper;
 import com.by.dao.WxUserMapper;
 import com.by.po.MatchingStandard;
+import com.by.redis.JedisUtil;
+import com.by.redis.SerializeUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,7 +52,9 @@ public class MatchingReadyController {
         wxUser.setIsReady(new Short("1"));
         wxUserMapper.updateByPrimaryKeySelective(wxUser);
         map.put("success","true");
-        System.out.println("formID"+formId);
+
+        String key = openid + "formId";
+        JedisUtil.getJedis().lpush(SerializeUtil.serialize(key), SerializeUtil.serialize(formId));
         return map;
 /*
         MatchingStandard matchingStandard = new MatchingStandard();
