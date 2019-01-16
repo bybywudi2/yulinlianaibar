@@ -7,6 +7,7 @@ import com.by.dao.UserMapper;
 import com.by.dao.WxUserLoginMapper;
 import com.by.dao.WxUserMapper;
 import com.by.po.MatchingStandard;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +32,9 @@ public class MatchingReadyController {
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/ready/{openid}")
+    @RequestMapping("/ready")
     public @ResponseBody
-    Map match(@PathVariable String openid){
+    Map match(@Param("openid") String openid, @Param("formId") String formId){
         Map map = new HashMap();
         WxUser thisUser = wxUserLoginMapper.selectByOpenid(openid);
 
@@ -42,13 +43,16 @@ public class MatchingReadyController {
             map.put("msg","今天已有匹配对象");
             return map;
         }
-        User thisUser_info = userMapper.selectByPrimaryKey(thisUser.getUserId());
+        //User thisUser_info = userMapper.selectByPrimaryKey(thisUser.getUserId());
 
         WxUser wxUser = new WxUser();
         wxUser.setId(thisUser.getId());
         wxUser.setIsReady(new Short("1"));
         wxUserMapper.updateByPrimaryKeySelective(wxUser);
-
+        map.put("success","true");
+        System.out.println("formID"+formId);
+        return map;
+/*
         MatchingStandard matchingStandard = new MatchingStandard();
         matchingStandard.setOpenid(openid);
         if(thisUser_info.getSex().equals(new Short("0"))){
@@ -62,9 +66,9 @@ public class MatchingReadyController {
             int rand = (int)(0+Math.random()*(list.size()));
             WxUser matchedUser = list.get(rand);
             matchedUser.setMatchingUserId(thisUser.getId());
-            matchedUser.setShouldInitTime(new Date().getTime() + 24*60*60);
+            matchedUser.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
             thisUser.setMatchingUserId(matchedUser.getId());
-            thisUser.setShouldInitTime(new Date().getTime() + 24*60*60);
+            thisUser.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
 
             wxUserMapper.updateByPrimaryKeySelective(thisUser);
             wxUserMapper.updateByPrimaryKeySelective(matchedUser);
@@ -77,5 +81,7 @@ public class MatchingReadyController {
         }
 
         return map;
+        */
     }
+
 }

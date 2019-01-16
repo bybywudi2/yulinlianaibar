@@ -86,7 +86,8 @@ public class UserLoginController {
         wxUser.setSex(Short.parseShort("1"));
         wxUser.setCreateTime(new Date().getTime());
         wxUser.setLatestLoginTime(new Date().getTime());
-        wxUserMapper.insert(wxUser);
+        //wxUser.setIsReady(new Short("0"));
+        wxUserMapper.insertSelective(wxUser);
         map.put("success","true");
         map.put("userinfo",wxUser);
         map.put("msg","未注册用户，已注册并登录成功");

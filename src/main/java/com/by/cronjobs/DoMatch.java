@@ -41,8 +41,8 @@ public class DoMatch {
                     u2 = maleList.get(arr[i]);
                     u1.setMatchingUserId(u2.getId());
                     u2.setMatchingUserId(u1.getId());
-                    u1.setShouldInitTime(new Date().getTime() + 24*60*60);
-                    u2.setShouldInitTime(new Date().getTime() + 24*60*60);
+                    u1.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
+                    u2.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
                     wxUserMapper.updateByPrimaryKeySelective(u1);
                     wxUserMapper.updateByPrimaryKeySelective(u2);
                     System.out.println("match"+"u1="+u1.getId()+"u2="+u2.getId());
@@ -63,8 +63,8 @@ public class DoMatch {
                     u2 = femaleList.get(arr[i]);
                     u1.setMatchingUserId(u2.getId());
                     u2.setMatchingUserId(u1.getId());
-                    u1.setShouldInitTime(new Date().getTime() + 24*60*60);
-                    u2.setShouldInitTime(new Date().getTime() + 24*60*60);
+                    u1.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
+                    u2.setShouldInitTime(new Date().getTime() + 24*60*60*1000);
                     wxUserMapper.updateByPrimaryKeySelective(u1);
                     wxUserMapper.updateByPrimaryKeySelective(u2);
                     System.out.println("match"+"u1="+u1.getId()+"u2="+u2.getId());
